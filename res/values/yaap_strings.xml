@@ -734,4 +734,8 @@
     <string name="ui_night_mode_dim_wall_summary">Dim the wallpaper when using dark theme</string>
     <string name="ui_night_mode_dim_wall_amount_title">Dim amount</string>
     <string name="ui_night_light_dim_wall_summary">Dim the wallpaper when using night light</string>
+
+    <!-- Notifications while screen on -->
+    <string name="notification_sound_vib_screen_on_title">Screen-On Notifications</string>
+    <string name="notification_sound_vib_screen_on_summary">Allow sound and vibration alerts when the screen is on</string>
 </resources>

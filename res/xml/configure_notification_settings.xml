@@ -179,6 +179,14 @@
             android:summary="@string/notification_headers_summary"
             android:defaultValue="true" />
 
+        <!-- Notifications while screen on -->
+        <com.yasp.settings.preferences.SystemSettingSwitchPreference
+            android:key="notification_sound_vib_screen_on"
+            android:order="45"
+            android:title="@string/notification_sound_vib_screen_on_title"
+            android:summary="@string/notification_sound_vib_screen_on_summary"
+            android:defaultValue="true" />
+
         <SwitchPreferenceCompat
              android:key="silent_icons"
              android:order="48"
