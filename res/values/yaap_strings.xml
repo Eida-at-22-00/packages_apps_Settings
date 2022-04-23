@@ -764,4 +764,8 @@
     
     <!-- Min refresh rate -->
     <string name="min_refresh_rate_title">Minimum refresh rate</string>
+
+    <!-- Ignore window secure -->
+    <string name="ignore_window_secure_title">Ignore window secure flags</string>
+    <string name="ignore_window_secure_summary">Enables screenshots and screen recordings in all apps. May expose sensitive or private content. Restart apps after toggling.</string>
 </resources>
