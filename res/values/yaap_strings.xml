@@ -718,4 +718,8 @@
     <string name="ramping_ringer_no_silence_title">Skip silence</string>
     <string name="ramping_ringer_no_silence_summary_on">Start ramping right when ringing starts</string>
     <string name="ramping_ringer_no_silence_summary_off">Vibrate only for half of the duration before ramping</string>
+
+    <!-- Minimum auto brightness -->
+    <string name="user_min_auto_brightness_title">Minimal auto brightness</string>
+    <string name="user_min_auto_brightness_summary">Caps auto brightness minimum value</string>
 </resources>

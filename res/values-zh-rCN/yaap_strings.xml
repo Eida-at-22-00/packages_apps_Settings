@@ -650,4 +650,8 @@
     <!-- Long press navbar to search -->
     <string name="navbar_long_press_gesture_title">长按搜索</string>
     <string name="navbar_long_press_gesture_summary">长按手势栏以搜索屏幕上的内容</string>
+
+    <!-- Minimum auto brightness -->
+    <string name="user_min_auto_brightness_title">自动亮度最小值</string>
+    <string name="user_min_auto_brightness_summary">自动亮度调整时的亮度下限</string>
 </resources>
