@@ -51,8 +51,8 @@
     <string name="update_settings_title">YAAP 更新</string>
     <string name="update_settings_summary">检查系统更新</string>
 
-    <!-- String for removal of sensitive info on about, depending on tap -->
-    <string name="device_info_protected_single_press">点击显示</string>
+    <!-- Radio Diagnostics -->
+    <string name="radio_info_title">手机信息</string>
 
     <!-- YAAP Version -->
     <string name="yaap_version">YAAP 版本</string>
@@ -106,8 +106,12 @@
     <string name="gaming_mode_night_light_summary">关闭护眼模式</string>
     <string name="gaming_mode_battery_schedule_title">省电模式</string>
     <string name="gaming_mode_battery_schedule_summary">关闭省电模式</string>
+    <string name="gaming_mode_power_title">性能模式</string>
+    <string name="gaming_mode_power_summary">是否开启游戏性能模式</string>
     <string name="gaming_mode_bluetooth_title">蓝牙</string>
     <string name="gaming_mode_bluetooth_summary">是否开启蓝牙</string>
+    <string name="gaming_mode_three_finger_title">滑动截图</string>
+    <string name="gaming_mode_three_finger_summary">是否关闭三指滑动截图手势</string>
     <string name="gaming_mode_extra_dim_title">极暗</string>
     <string name="gaming_mode_extra_dim_summary">是否关闭或定时极暗模式</string>
     <string name="gaming_mode_brightness_enabled_title">自动亮度</string>
@@ -118,8 +122,15 @@
     <string name="gaming_mode_media_enabled_summary">设置媒体音量</string>
     <string name="gaming_mode_media_title">音量设置</string>
     <string name="gaming_mode_desc">打开游戏模式时将会启用上方设置，关闭后将会恢复原本设置</string>
-    <string name="gaming_mode_screen_off_title">息屏时关闭</string>
-    <string name="gaming_mode_screen_off_summary">息屏时自动关闭游戏模式</string>
+    <string name="gaming_mode_desc_auto">如果你想在某个软件打开时自动开启游戏模式，请打开该应用程序的信息设置，并启用\"游戏模式\"开关</string>
+    <string name="gaming_mode_screen_off_title">息屏时暂停</string>
+    <string name="gaming_mode_screen_off_summary">息屏时自动暂停游戏模式</string>
+    <string name="gaming_mode_battery_saver_disables_title">省电模式时暂停</string>
+    <string name="gaming_mode_battery_saver_disables_summary">省电模式时自动暂停游戏模式</string>
+    <string name="gaming_macro_switch_summary">为此应用启动游戏模式</string>
+    <string name="gaming_mode_category_behavior">@string/notification_importance_title</string>
+    <string name="gaming_mode_category_notifications">通知 &amp; 音量</string>
+    <string name="gaming_mode_category_power">电源</string>
 
     <!-- 3-Button navigation settings -->
     <string name="button_settings_activity_title">三按钮导航</string>
@@ -362,6 +373,13 @@
     <string name="panic_settings_title">显示紧急情况选项</string>
     <!-- Text shown for the description of the panic option -->
     <string name="panic_settings_summary">在电源菜单显示一个可激活紧急情况的选项</string>
+
+    <!-- String for removal of sensitive info on about, depending on tap -->
+    <string name="device_info_protected_single_press">点击显示</string>
+
+    <!-- About YAAP -->
+    <string name="about_yaap_title">关于 YAAP</string>
+    <string name="about_yaap_summary">我们的团队、代码、Telegram 群组以及更多！</string>
 
     <!-- YASP Import -->
 
@@ -611,4 +629,25 @@
     <!-- Unlimit screenrecord -->
     <string name="unlimit_screenrecord_title">无限屏幕录制</string>
     <string name="unlimit_screenrecord_summary">移除 15GB 的文件大小限制\n可能会占用更多空间</string>
+
+    <!-- Block wallpaper dimming -->
+    <string name="block_wallpaper_dimming_title">忽略壁纸变暗请求</string>
+    <string name="block_wallpaper_dimming_summary">阻止所有应用将壁纸变暗\n强制设为 0</string>
+
+    <!-- Slider haptics -->
+    <string name="volume_panel_haptics_title">音量面板震动</string>
+    <string name="volume_panel_haptics_summary">是否开启音量面板震动反馈</string>
+    <string name="brightness_slider_haptics_title">震动反馈</string>
+    <string name="brightness_slider_haptics_summary">调整亮度滑块是是否震动</string>
+
+    <!-- Battery info -->
+    <string name="battery_info_footer">此处的数值由 OEM 提供，不一定准确反映实际情况，并且/或者在电池重新校准或恢复出厂设置后才会更新。</string>
+
+    <!-- Three-fingers-swipe to screenshot -->
+    <string name="three_finger_gesture">滑动截图</string>
+    <string name="three_finger_gesture_summary">三指下滑以截图</string>
+
+    <!-- Long press navbar to search -->
+    <string name="navbar_long_press_gesture_title">长按搜索</string>
+    <string name="navbar_long_press_gesture_summary">长按手势栏以搜索屏幕上的内容</string>
 </resources>
