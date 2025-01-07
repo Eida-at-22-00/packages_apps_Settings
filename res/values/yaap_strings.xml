@@ -728,4 +728,10 @@
 
     <!-- Summary for the private space setup education screen. [CHAR LIMIT=NONE] -->
     <string name="private_space_hide_apps_summary_calyx">Hide or lock private apps in a separate space.</string>
+
+    <!-- Dim wallpaper at night -->
+    <string name="ui_night_mode_dim_wall_title">Dim wallpaper</string>
+    <string name="ui_night_mode_dim_wall_summary">Dim the wallpaper when using dark theme</string>
+    <string name="ui_night_mode_dim_wall_amount_title">Dim amount</string>
+    <string name="ui_night_light_dim_wall_summary">Dim the wallpaper when using night light</string>
 </resources>

@@ -17,6 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/dark_ui_mode"
     settings:keywords="@string/keywords_dark_ui_mode">
 
@@ -35,13 +36,30 @@
         android:title="@string/twilight_mode_location_off_dialog_message"
         settings:controller="com.android.settings.display.TwilightLocationPreferenceController"/>
 
+    <!-- Dim wallpaper at night -->
+    <com.yasp.settings.preferences.SecureSettingSwitchPreference
+        android:key="ui_night_mode_dim_wall"
+        android:title="@string/ui_night_mode_dim_wall_title"
+        android:summary="@string/ui_night_mode_dim_wall_summary"
+        android:defaultValue="false"
+        settings:allowDividerAbove="true" />
+
+    <com.yasp.settings.preferences.SecureSettingSeekBarPreference
+        android:key="ui_night_mode_dim_wall_amount"
+        android:title="@string/ui_night_mode_dim_wall_amount_title"
+        android:dependency="ui_night_mode_dim_wall"
+        android:defaultValue="40"
+        android:max="90"
+        app:min="10"
+        app:interval="5"
+        settings:units="%" />
+
     <DropDownPreference
         android:key="dark_ui_auto_mode"
         android:title="@string/dark_ui_auto_mode_title"
         android:summary="%s"
         android:entries="@array/dark_ui_scheduler_preference_titles"
         android:entryValues="@array/dark_ui_scheduler_preference_titles"
-        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.display.darkmode.DarkModeScheduleSelectorController"
         settings:keywords="@string/keywords_dark_ui_mode"/>
 
