@@ -18,17 +18,36 @@ package com.android.settings.deviceinfo.firmwareversion;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.deviceinfo.BuildNumberPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 @SearchIndexable
 public class FirmwareVersionSettings extends DashboardFragment {
+
+    private BuildNumberPreferenceController mBuildNumberPreferenceController;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mBuildNumberPreferenceController = use(BuildNumberPreferenceController.class);
+        mBuildNumberPreferenceController.setHost(this /* parent */);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (mBuildNumberPreferenceController.onActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
