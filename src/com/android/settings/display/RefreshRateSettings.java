@@ -61,6 +61,13 @@ public class RefreshRateSettings extends RadioButtonPickerFragment {
 
     @Override
     protected void addStaticPreferences(PreferenceScreen screen) {
+        com.android.settingslib.widget.IllustrationPreference illustrationPreference =
+                new com.android.settingslib.widget.IllustrationPreference(screen.getContext());
+        illustrationPreference.setKey("display_refresh_illustration");
+        illustrationPreference.setLottieAnimationResId(R.raw.display_refresh_rate);
+        illustrationPreference.setOrder(-1001);
+        screen.addPreference(illustrationPreference);
+
         mVrrSwitchPref = new SwitchPreferenceCompat(screen.getContext());
         mVrrSwitchPref.setKey(KEY_VRR_PREF);
         mVrrSwitchPref.setTitle(R.string.refresh_rate_vrr_title);
