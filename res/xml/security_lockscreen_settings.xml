@@ -148,11 +148,13 @@
             settings:controller="com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController"
             settings:userRestriction="no_ambient_display" />
 
-        <com.yasp.settings.preferences.SecureSettingSwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="doze_on_charge"
-            android:defaultValue="false"
             android:title="@string/doze_on_charge_title"
-            android:summary="@string/doze_on_charge_summary" />
+            android:summary="@string/doze_on_charge_summary"
+            settings:keywords="@string/keywords_always_show_time_info"
+            settings:controller="com.android.settings.display.DozeOnChargePreferenceController"
+            settings:userRestriction="no_ambient_display" />
 
         <!-- YASP AOD Schedule -->
         <Preference

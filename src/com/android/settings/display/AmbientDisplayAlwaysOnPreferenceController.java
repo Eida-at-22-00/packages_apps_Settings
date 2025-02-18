@@ -31,10 +31,10 @@ import com.android.settings.core.TogglePreferenceController;
 
 public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreferenceController {
 
-    private final int ON = 1;
-    private final int OFF = 0;
+    protected final int ON = 1;
+    protected final int OFF = 0;
 
-    private static final int MY_USER = UserHandle.myUserId();
+    protected static final int MY_USER = UserHandle.myUserId();
     private static final String PROP_AWARE_AVAILABLE = "ro.vendor.aware_available";
     private static final String AOD_SUPPRESSED_TOKEN = "winddown";
 
@@ -102,7 +102,7 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
         return config.alwaysOnAvailableForUser(MY_USER);
     }
 
-    private AmbientDisplayConfiguration getConfig() {
+    protected AmbientDisplayConfiguration getConfig() {
         if (mConfig == null) {
             mConfig = new AmbientDisplayConfiguration(mContext);
         }
