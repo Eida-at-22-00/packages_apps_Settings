@@ -69,6 +69,15 @@ public class GamingModeFragment extends DashboardFragment {
                         Context context) {
                     return buildPreferenceControllers(context);
                 }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    if (!GamingModeController.isTouchSensitivityAvailable(context)) {
+                        keys.add(GamingModeController.GAMING_MODE_TOUCH_SENSITIVITY_KEY);
+                    }
+                    return keys;
+                }
             };
 
 }

@@ -144,6 +144,12 @@
             android:summary="@string/gaming_mode_three_finger_summary"
             android:defaultValue="false" />
 
+        <com.yasp.settings.preferences.SystemSettingSwitchPreference
+            android:key="gaming_mode_touch_sensitivity"
+            android:title="@string/gaming_mode_touch_sensitivity_title"
+            android:summary="@string/gaming_mode_touch_sensitivity_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <Preference

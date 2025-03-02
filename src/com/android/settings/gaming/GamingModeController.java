@@ -34,6 +34,7 @@ public class GamingModeController extends AbstractPreferenceController
     private static final String GAMING_MODE_MEDIA_KEY = "gaming_mode_media";
     private static final String GAMING_MODE_BRIGHTNESS_KEY = "gaming_mode_brightness";
     private static final String GAMING_MODE_RINGER_KEY = "gaming_mode_ringer";
+    public static final String GAMING_MODE_TOUCH_SENSITIVITY_KEY = "gaming_mode_touch_sensitivity";
 
     CustomSeekBarPreference mMediaVolume;
     CustomSeekBarPreference mBrightnessLevel;
@@ -63,6 +64,11 @@ public class GamingModeController extends AbstractPreferenceController
         mRingerMode.setValue(Integer.toString(value));
         mRingerMode.setSummary(mRingerMode.getEntry());
         mRingerMode.setOnPreferenceChangeListener(this);
+
+        if (!isTouchSensitivityAvailable(mContext)) {
+            Preference pref = screen.findPreference(GAMING_MODE_TOUCH_SENSITIVITY_KEY);
+            pref.setVisible(false);
+        }
     }
 
     @Override
@@ -94,5 +100,9 @@ public class GamingModeController extends AbstractPreferenceController
             return true;
         }
         return false;
+    }
+
+    public static boolean isTouchSensitivityAvailable(Context context) {
+        return context.getResources().getBoolean(com.android.internal.R.bool.config_supportGloveMode);
     }
 }
