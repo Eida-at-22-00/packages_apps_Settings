@@ -116,6 +116,7 @@
     <string name="gaming_mode_ringer_disabled">Don\'t change</string>
     <string name="gaming_mode_ringer_vibrate">Vibrate</string>
     <string name="gaming_mode_ringer_silent">Silent</string>
+    <string name="gaming_mode_color_mode_title">Color Mode</string>
     <string name="gaming_mode_night_light_title">Night Light</string>
     <string name="gaming_mode_night_light_summary">Whether to disable Night Light and schedule</string>
     <string name="gaming_mode_battery_schedule_title">Battery Saver</string>

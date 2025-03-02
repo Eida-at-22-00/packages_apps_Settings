@@ -17,15 +17,22 @@ package com.android.settings.gaming;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.hardware.display.ColorDisplayManager;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
+import com.android.settings.display.ColorModeUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import com.yasp.settings.preferences.CustomSeekBarPreference;
 import com.yasp.settings.preferences.SystemSettingListPreference;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class GamingModeController extends AbstractPreferenceController
         implements Preference.OnPreferenceChangeListener {
@@ -35,10 +42,12 @@ public class GamingModeController extends AbstractPreferenceController
     private static final String GAMING_MODE_BRIGHTNESS_KEY = "gaming_mode_brightness";
     private static final String GAMING_MODE_RINGER_KEY = "gaming_mode_ringer";
     public static final String GAMING_MODE_TOUCH_SENSITIVITY_KEY = "gaming_mode_touch_sensitivity";
+    public static final String GAMING_MODE_COLOR_KEY = "gaming_mode_color_mode";
 
-    CustomSeekBarPreference mMediaVolume;
-    CustomSeekBarPreference mBrightnessLevel;
-    SystemSettingListPreference mRingerMode;
+    private CustomSeekBarPreference mMediaVolume;
+    private CustomSeekBarPreference mBrightnessLevel;
+    private SystemSettingListPreference mRingerMode;
+    private SystemSettingListPreference mColorMode;
 
     public GamingModeController(Context context) {
         super(context);
@@ -69,6 +78,36 @@ public class GamingModeController extends AbstractPreferenceController
             Preference pref = screen.findPreference(GAMING_MODE_TOUCH_SENSITIVITY_KEY);
             pref.setVisible(false);
         }
+
+        mColorMode = screen.findPreference(GAMING_MODE_COLOR_KEY);
+        if (isColorModeAvailable(mContext)) {
+            Map<Integer, String> colorModeMapping = ColorModeUtils.getColorModeMapping(
+                    mContext.getResources());
+
+            List<String> entries = new ArrayList<>();
+            entries.add(mContext.getString(R.string.gaming_mode_ringer_disabled));
+            entries.addAll(colorModeMapping.values());
+            CharSequence[] entriesArr = new CharSequence[entries.size()];
+            entriesArr = entries.toArray(entriesArr);
+            mColorMode.setEntries(entriesArr);
+
+            CharSequence[] entryValuesArr = new CharSequence[colorModeMapping.keySet().size() + 1];
+            entryValuesArr[0] = "-1";
+            int i = 1;
+            for (Integer key : colorModeMapping.keySet()) {
+                entryValuesArr[i++] = String.valueOf(key);
+            }
+            mColorMode.setEntryValues(entryValuesArr);
+
+            value = Settings.System.getInt(resolver, GAMING_MODE_COLOR_KEY, -1);
+            mColorMode.setValue(String.valueOf(value));
+            mColorMode.setSummary(value == -1
+                    ? mContext.getString(R.string.gaming_mode_ringer_disabled)
+                    : mColorMode.getEntries()[value]);
+            mColorMode.setOnPreferenceChangeListener(this);
+        } else {
+            mColorMode.setVisible(false);
+        }
     }
 
     @Override
@@ -98,11 +137,33 @@ public class GamingModeController extends AbstractPreferenceController
             mRingerMode.setSummary(mRingerMode.getEntries()[index]);
             Settings.System.putInt(resolver, GAMING_MODE_RINGER_KEY, value);
             return true;
+        } else if (preference == mColorMode) {
+            int value = Integer.parseInt((String) newValue);
+            int index = mColorMode.findIndexOfValue((String) newValue);
+            mColorMode.setSummary(mColorMode.getEntries()[index]);
+            Settings.System.putInt(resolver, GAMING_MODE_COLOR_KEY, value);
+            return true;
         }
         return false;
     }
 
     public static boolean isTouchSensitivityAvailable(Context context) {
         return context.getResources().getBoolean(com.android.internal.R.bool.config_supportGloveMode);
+    }
+
+    public static boolean isColorModeAvailable(Context context) {
+        final int[] availableColorModes = context.getResources().getIntArray(
+                com.android.internal.R.array.config_availableColorModes);
+        if (availableColorModes.length == 0) {
+            return false;
+        }
+        if (!context.getSystemService(ColorDisplayManager.class)
+                .isDeviceColorManaged()) {
+            return false;
+        }
+        if (ColorDisplayManager.areAccessibilityTransformsEnabled(context)) {
+            return false;
+        }
+        return true;
     }
 }

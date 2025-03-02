@@ -80,6 +80,11 @@
     <PreferenceCategory
         android:title="@string/gaming_mode_category_display">
 
+        <com.yasp.settings.preferences.SystemSettingListPreference
+            android:key="gaming_mode_color_mode"
+            android:title="@string/gaming_mode_color_mode_title"
+            android:defaultValue="-1" />
+
         <com.yasp.settings.preferences.SystemSettingSwitchPreference
             android:key="gaming_mode_night_light"
             android:title="@string/gaming_mode_night_light_title"

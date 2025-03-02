@@ -76,6 +76,9 @@ public class GamingModeFragment extends DashboardFragment {
                     if (!GamingModeController.isTouchSensitivityAvailable(context)) {
                         keys.add(GamingModeController.GAMING_MODE_TOUCH_SENSITIVITY_KEY);
                     }
+                    if (!GamingModeController.isColorModeAvailable(context)) {
+                        keys.add(GamingModeController.GAMING_MODE_COLOR_KEY);
+                    }
                     return keys;
                 }
             };

@@ -30,13 +30,13 @@ import com.android.settings.R;
 
 import java.util.Map;
 
-final class ColorModeUtils {
+public final class ColorModeUtils {
 
     private ColorModeUtils() {
         // Do not instantiate.
     }
 
-    static Map<Integer, String> getColorModeMapping(Resources resources) {
+    public static Map<Integer, String> getColorModeMapping(Resources resources) {
         final String[] colorModeOptionsStrings = resources.getStringArray(
                 R.array.config_color_mode_options_strings);
         final int[] colorModeOptionsValues = resources.getIntArray(
