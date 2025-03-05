@@ -43,6 +43,14 @@
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.notification.history.NotificationHistoryActivity" />
         </Preference>
+
+        <Preference
+            android:fragment="com.android.settings.notification.BundlePreferenceFragment"
+            android:key="bundle_notifications_preference"
+            android:persistent="false"
+            android:order="12"
+            android:title="@string/notification_bundle_title"
+            settings:controller="com.android.settings.notification.BundlePreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -84,6 +92,14 @@
             android:singleLineTitle="false"
             android:summary="@string/summary_placeholder" />
 
+        <Preference
+            android:key="lock_screen_notifications_page"
+            android:order="14"
+            android:persistent="false"
+            android:title="@string/lock_screen_notifs_title"
+            android:fragment="com.android.settings.notification.LockScreenNotificationsPreferencePageFragment"
+            settings:controller="com.android.settings.notification.LockScreenNotificationsPreferencePageController" />
+
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="lock_screen_redact"
             android:order="-10"
@@ -121,19 +137,27 @@
         <Preference
             android:fragment="com.android.settings.notification.PoliteNotificationsPreferenceFragment"
             android:key="polite_notifications_preference"
-            android:order="17"
+            android:order="18"
             android:persistent="false"
             android:title="@string/notification_polite_title"
             settings:controller="com.android.settings.notification.PoliteNotificationsPreferenceController" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="zen_mode_notifications"
-            android:order="18"
+            android:order="19"
             android:title="@string/zen_mode_settings_title"
             settings:useAdminDisabledSummary="true"
             android:fragment="com.android.settings.notification.zen.ZenModeSettings"
             settings:controller="com.android.settings.notification.zen.ZenModePreferenceController"
         />
+
+        <SwitchPreferenceCompat
+            android:key="lock_screen_notif_minimalism"
+            android:order="20"
+            android:title="@string/lock_screen_notif_minimalism"
+            android:summary="@string/lock_screen_notif_minimalism_summary"
+            settings:controller="com.android.settings.notification.LockscreenNotificationMinimalismPreferenceController"
+            />
 
         <SwitchPreferenceCompat
             android:key="lock_screen_show_only_unseen_notifs"

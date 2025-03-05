@@ -23,6 +23,8 @@ import android.os.Vibrator;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
@@ -39,6 +41,11 @@ import com.android.settingslib.search.SearchIndexable;
 public class VibrationSettings extends DashboardFragment {
 
     private static final String TAG = "VibrationSettings";
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return VibrationScreen.KEY;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {

@@ -28,7 +28,6 @@ import com.android.settings.accessibility.AccessibilityDetailsSettingsFragment;
 import com.android.settings.accessibility.AccessibilityHearingAidsFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
-import com.android.settings.accessibility.AutoBrightnessPreferenceFragmentForSetupWizard;
 import com.android.settings.accessibility.CaptioningPropertiesFragment;
 import com.android.settings.accessibility.ColorAndMotionFragment;
 import com.android.settings.accessibility.HearingDevicePairingFragment;
@@ -44,6 +43,7 @@ import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountFragment;
 import com.android.settings.accounts.ManagedProfileSettings;
 import com.android.settings.applications.AppDashboardFragment;
+import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.RunningServices;
@@ -61,6 +61,7 @@ import com.android.settings.applications.appinfo.TurnScreenOnDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.applications.appops.BackgroundCheckSummary;
 import com.android.settings.applications.assist.ManageAssist;
+import com.android.settings.applications.contacts.ContactsStorageSettings;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.applications.managedomainurls.ManageDomainUrls;
 import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings;
@@ -119,6 +120,7 @@ import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverAdvancedSettings;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleSettings;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
+import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvanced;
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummary;
 import com.android.settings.gaming.GamingModeFragment;
 import com.android.settings.gestures.ButtonNavigationSettingsFragment;
@@ -135,7 +137,7 @@ import com.android.settings.inputmethod.ModifierKeysSettings;
 import com.android.settings.inputmethod.NewKeyboardLayoutEnabledLocalesFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
-import com.android.settings.inputmethod.TrackpadSettings;
+import com.android.settings.inputmethod.TouchpadAndMouseSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.language.LanguageSettings;
@@ -182,7 +184,9 @@ import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.privatespace.delete.PrivateSpaceDeleteFragment;
 import com.android.settings.privatespace.delete.PrivateSpaceDeletionProgressFragment;
 import com.android.settings.privatespace.onelock.PrivateSpaceBiometricSettings;
+import com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment;
 import com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment;
+import com.android.settings.regionalpreferences.TemperatureUnitFragment;
 import com.android.settings.safetycenter.MoreSecurityPrivacyFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.MemtagPage;
@@ -240,7 +244,7 @@ public class SettingsGateway {
             KeyboardSettings.class.getName(),
             ModifierKeysSettings.class.getName(),
             NewKeyboardLayoutEnabledLocalesFragment.class.getName(),
-            TrackpadSettings.class.getName(),
+            TouchpadAndMouseSettings.class.getName(),
             SpellCheckersSettings.class.getName(),
             UserDictionaryList.class.getName(),
             UserDictionarySettings.class.getName(),
@@ -248,6 +252,7 @@ public class SettingsGateway {
             MyDeviceInfoFragment.class.getName(),
             ModuleLicensesDashboard.class.getName(),
             ManageApplications.class.getName(),
+            AppStorageSettings.class.getName(),
             FirmwareVersionSettings.class.getName(),
             ManageAssist.class.getName(),
             ProcessStatsUi.class.getName(),
@@ -269,7 +274,6 @@ public class SettingsGateway {
             EditShortcutsPreferenceFragment.class.getName(),
             TextReadingPreferenceFragment.class.getName(),
             TextReadingPreferenceFragmentForSetupWizard.class.getName(),
-            AutoBrightnessPreferenceFragmentForSetupWizard.class.getName(),
             CaptioningPropertiesFragment.class.getName(),
             ToggleDaltonizerPreferenceFragment.class.getName(),
             ToggleColorInversionPreferenceFragment.class.getName(),
@@ -280,6 +284,7 @@ public class SettingsGateway {
             DevelopmentSettingsDashboardFragment.class.getName(),
             WifiDisplaySettings.class.getName(),
             PowerUsageSummary.class.getName(),
+            PowerUsageAdvanced.class.getName(),
             AccountSyncSettings.class.getName(),
             FaceSettings.class.getName(),
             FingerprintSettings.FingerprintSettingsFragment.class.getName(),
@@ -394,6 +399,8 @@ public class SettingsGateway {
             ColorContrastFragment.class.getName(),
             LongBackgroundTasksDetails.class.getName(),
             RegionalPreferencesEntriesFragment.class.getName(),
+            TemperatureUnitFragment.class.getName(),
+            FirstDayOfWeekItemFragment.class.getName(),
             BatteryInfoFragment.class.getName(),
             UserAspectRatioDetails.class.getName(),
             ScreenTimeoutSettings.class.getName(),
@@ -404,6 +411,7 @@ public class SettingsGateway {
             HearingDevicePairingFragment.class.getName(),
             ZenModesListFragment.class.getName(),
             ZenModeFragment.class.getName(),
+            ContactsStorageSettings.class.getName(),
             GamingModeFragment.class.getName(),
             WifiTetherClientManager.class.getName(),
             WirelessDebuggingFragment.class.getName(),
@@ -422,6 +430,7 @@ public class SettingsGateway {
             Settings.SoundSettingsActivity.class.getName(),
             Settings.StorageDashboardActivity.class.getName(),
             Settings.PowerUsageSummaryActivity.class.getName(),
+            Settings.PowerUsageAdvancedActivity.class.getName(),
             Settings.AccountDashboardActivity.class.getName(),
             Settings.PrivacySettingsActivity.class.getName(),
             Settings.SecurityDashboardActivity.class.getName(),
@@ -441,13 +450,12 @@ public class SettingsGateway {
             Settings.UserSettingsActivity.class.getName(),
             Settings.ConfigureNotificationSettingsActivity.class.getName(),
             Settings.ManageApplicationsActivity.class.getName(),
+            Settings.AppStorageSettingsActivity.class.getName(),
             Settings.PaymentSettingsActivity.class.getName(),
             // Home page > Display
             Settings.AdaptiveBrightnessActivity.class.getName(),
             // Home page > Security & screen lock
             Settings.LocationSettingsActivity.class.getName(),
-            // Home page > System
-            Settings.LanguageAndInputSettingsActivity.class.getName(),
             Settings.LanguageSettingsActivity.class.getName(),
             Settings.KeyboardSettingsActivity.class.getName(),
             Settings.DateTimeSettingsActivity.class.getName(),

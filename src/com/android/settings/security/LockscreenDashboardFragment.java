@@ -31,6 +31,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -65,8 +67,6 @@ import java.util.List;
 @SearchIndexable
 public class LockscreenDashboardFragment extends DashboardFragment
         implements OwnerInfoPreferenceController.OwnerInfoCallback {
-
-    public static final String KEY_AMBIENT_DISPLAY_ALWAYS_ON = "ambient_display_always_on";
 
     private static final String TAG = "LockscreenDashboardFragment";
 
@@ -155,8 +155,10 @@ public class LockscreenDashboardFragment extends DashboardFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(AmbientDisplayAlwaysOnPreferenceController.class).setConfig(getConfig(context));
         use(AmbientDisplayAlwaysOnSchedulePreferenceController.class).setConfig(getConfig(context));
+        if (!isCatalystEnabled()) {
+            use(AmbientDisplayAlwaysOnPreferenceController.class).setConfig(getConfig(context));
+        }
         use(AmbientDisplayNotificationsPreferenceController.class).setConfig(getConfig(context));
         use(DozeOnChargePreferenceController.class).setConfig(getConfig(context));
         use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
@@ -209,6 +211,11 @@ public class LockscreenDashboardFragment extends DashboardFragment
         if (mOwnerInfoPreferenceController != null) {
             mOwnerInfoPreferenceController.updateSummary();
         }
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return LockScreenPreferenceScreen.KEY;
     }
 
     private void updateWeatherEnablement(int provider) {

@@ -24,9 +24,8 @@ import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings;
-import android.text.TextUtils;
 
-import androidx.annotation.VisibleForTesting;
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreferenceCompat;
@@ -40,13 +39,10 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 public class DoubleTapPowerPreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
-    @VisibleForTesting
-    static final int ON = 0;
-    @VisibleForTesting
-    static final int OFF = 1;
-
     private static final String PREF_KEY = "gesture_double_tap_power";
     private final String SECURE_KEY = CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
+    private static final int ON = 0;
+    private static final int OFF = 1;
 
     private SwitchPreferenceCompat mPreference;
 
@@ -58,7 +54,7 @@ public class DoubleTapPowerPreferenceController extends TogglePreferenceControll
         }
     };
 
-    public DoubleTapPowerPreferenceController(Context context, String key) {
+    public DoubleTapPowerPreferenceController(@NonNull Context context, @NonNull String key) {
         super(context, key);
     }
 
@@ -67,15 +63,13 @@ public class DoubleTapPowerPreferenceController extends TogglePreferenceControll
                 || prefs.getBoolean(PowerMenuSettings.PREF_KEY_SUGGESTION_COMPLETE, false);
     }
 
-    private static boolean isGestureAvailable(Context context) {
-        return context.getResources()
-                .getBoolean(com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = screen.findPreference(PREF_KEY);
+    private static boolean isGestureAvailable(@NonNull Context context) {
+        if (!android.service.quickaccesswallet.Flags.launchWalletOptionOnPowerDoubleTap()) {
+            return context.getResources()
+                    .getBoolean(
+                            com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
+        }
+        return DoubleTapPowerSettingsUtils.isDoubleTapPowerButtonGestureAvailable(context);
     }
 
     @Override
@@ -106,8 +100,14 @@ public class DoubleTapPowerPreferenceController extends TogglePreferenceControll
     }
 
     @Override
-    public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), "gesture_double_tap_power");
+    public void displayPreference(@NonNull PreferenceScreen screen) {
+        if (!android.service.quickaccesswallet.Flags.launchWalletOptionOnPowerDoubleTap()) {
+            mPreference = screen.findPreference(PREF_KEY);
+            if (mPreference != null) {
+                mPreference.setTitle(R.string.double_tap_power_for_camera_title);
+            }
+        }
+        super.displayPreference(screen);
     }
 
     @Override
