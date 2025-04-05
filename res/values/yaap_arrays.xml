@@ -66,10 +66,10 @@
     </string-array>
 
     <string-array name="navbar_layout_values" translatable="false">
-        <item>default</item>
-        <item>left;back,home,recent;right</item>
-        <item>left,back,home,recent,right;space;space</item>
-        <item>space;space;left,back,home,recent,right</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
 
     <string-array name="notification_vibration_pattern_entries" translatable="false">

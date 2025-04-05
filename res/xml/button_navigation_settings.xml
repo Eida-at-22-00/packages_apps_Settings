@@ -45,11 +45,11 @@
         android:defaultValue="false" />
 
     <com.yasp.settings.preferences.SystemSettingListPreference
-        android:key="navbar_layout_views"
+        android:key="navbar_layout_mode"
         android:title="@string/navbar_layout_title"
         android:summary="%s"
         android:entries="@array/navbar_layout_entries"
         android:entryValues="@array/navbar_layout_values"
-        android:defaultValue="default" />
+        android:defaultValue="0" />
 
 </PreferenceScreen>
