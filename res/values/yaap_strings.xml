@@ -492,6 +492,9 @@
     <string name="network_traffic_limit_mb_summary_off">Set the threshold in KB/s</string>
     <string name="network_traffic_arrow_title">Show arrows</string>
     <string name="network_traffic_arrow_summary">Show the network traffic indicator arrows</string>
+    <string name="network_traffic_text_enabled_title">Text Enabled</string>
+    <string name="network_traffic_text_enabled_summary_on">Show traffic speed near the arrows</string>
+    <string name="network_traffic_text_enabled_summary_off">Only show the arrows indicating activity</string>
     <string name="network_traffic_type">Select net activity type</string>
     <string name="show_network_traffic_combined">Combined (Upload + Download)</string>
     <string name="show_network_traffic_dynamic">Dynamic</string>
