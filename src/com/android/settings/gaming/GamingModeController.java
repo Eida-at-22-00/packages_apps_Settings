@@ -42,6 +42,7 @@ public class GamingModeController extends AbstractPreferenceController
     private static final String GAMING_MODE_BRIGHTNESS_KEY = "gaming_mode_brightness";
     private static final String GAMING_MODE_RINGER_KEY = "gaming_mode_ringer";
     public static final String GAMING_MODE_TOUCH_SENSITIVITY_KEY = "gaming_mode_touch_sensitivity";
+    public static final String GAMING_MODE_HIGH_TOUCH_RATE_KEY = "gaming_mode_high_touch_rate";
     public static final String GAMING_MODE_COLOR_KEY = "gaming_mode_color_mode";
 
     private CustomSeekBarPreference mMediaVolume;
@@ -76,6 +77,11 @@ public class GamingModeController extends AbstractPreferenceController
 
         if (!isTouchSensitivityAvailable(mContext)) {
             Preference pref = screen.findPreference(GAMING_MODE_TOUCH_SENSITIVITY_KEY);
+            pref.setVisible(false);
+        }
+
+        if (!isHighTouchRateAvailable(mContext)) {
+            Preference pref = screen.findPreference(GAMING_MODE_HIGH_TOUCH_RATE_KEY);
             pref.setVisible(false);
         }
 
@@ -149,6 +155,10 @@ public class GamingModeController extends AbstractPreferenceController
 
     public static boolean isTouchSensitivityAvailable(Context context) {
         return context.getResources().getBoolean(com.android.internal.R.bool.config_supportGloveMode);
+    }
+
+    public static boolean isHighTouchRateAvailable(Context context) {
+	return context.getResources().getBoolean(R.bool.config_supportHighTouchRate);
     }
 
     public static boolean isColorModeAvailable(Context context) {

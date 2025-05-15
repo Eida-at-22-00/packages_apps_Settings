@@ -155,6 +155,12 @@
             android:summary="@string/gaming_mode_touch_sensitivity_summary"
             android:defaultValue="false" />
 
+        <com.yasp.settings.preferences.SystemSettingSwitchPreference
+            android:key="gaming_mode_high_touch_rate"
+            android:title="@string/gaming_mode_touch_rate_title"
+            android:summary="@string/gaming_mode_touch_rate_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <Preference
