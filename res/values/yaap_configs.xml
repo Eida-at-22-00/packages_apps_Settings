@@ -32,4 +32,7 @@
     <!-- Show high touch polling rate option -->
     <bool name="config_supportHighTouchRate" translatable="false">false</bool>
 
+    <!-- Hide disable VRR option -->
+    <bool name="config_disableVrrSetting" translatable="false">false</bool>
+
 </resources>
