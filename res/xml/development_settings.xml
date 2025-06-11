@@ -770,6 +770,12 @@
             android:summary="@string/block_wallpaper_dimming_summary"
             android:defaultValue="false" />
 
+        <com.android.settings.development.KeyboxDataPreference
+            android:key="keybox_data_setting"
+            android:title="@string/keybox_data_title"
+            android:summary="@string/keybox_data_summary"
+            android:defaultValue=""/>
+
     </PreferenceCategory>
 
     <PreferenceCategory
