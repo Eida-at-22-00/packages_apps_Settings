@@ -170,7 +170,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             InteractAcrossProfilesDetailsPreference(app)
             AlarmsAndRemindersAppListProvider.InfoPageEntryItem(app)
             WriteSystemPreferencesAppListProvider.InfoPageEntryItem(app)
-            Enable16KbAppCompatPreference(app)
+            Enable16KbAppCompatPreference(app, packageInfoPresenter)
             GameMacroSwitchPreference(app)
         }
 

@@ -72,7 +72,7 @@ public class PlaybackControlSwitchPreferenceController extends AbstractPreferenc
 
     public void setChecked(boolean isChecked) {
         if (mSwitch != null) {
-            mSwitch.updateStatus(isChecked);
+            mSwitch.setChecked(isChecked);
         }
         updateDelayEnablement(isChecked);
     }

@@ -19,6 +19,8 @@ package com.android.settings.gestures;
 import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
 import static android.provider.Settings.System.TORCH_POWER_BUTTON_GESTURE;
 
+import static com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_DISABLED_MODE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.ContentObserver;
@@ -69,7 +71,10 @@ public class DoubleTapPowerPreferenceController extends TogglePreferenceControll
                     .getBoolean(
                             com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
         }
-        return DoubleTapPowerSettingsUtils.isDoubleTapPowerButtonGestureAvailable(context);
+        return context.getResources()
+                .getInteger(
+                        com.android.internal.R.integer.config_doubleTapPowerGestureMode)
+                != DOUBLE_TAP_POWER_DISABLED_MODE;
     }
 
     @Override

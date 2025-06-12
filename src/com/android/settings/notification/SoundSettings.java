@@ -50,6 +50,7 @@ import com.android.settings.widget.UpdatableListPreferenceDialogFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.preference.UtilsKt;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -118,14 +119,12 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
         if (phoneRingTonePreference != null && openPhoneRingtonePicker) {
             onPreferenceTreeClick(phoneRingTonePreference);
         }
-        if (isCatalystEnabled()) {
-            for (String key : getPreferenceKeysInHierarchy()) {
-                Preference preference = findPreference(key);
-                if (preference instanceof VolumeSeekBarPreference) {
-                    ((VolumeSeekBarPreference) preference).setCallback(mVolumeCallback);
-                }
+        UtilsKt.forEachRecursively(getPreferenceScreen(), preference -> {
+            if (preference instanceof VolumeSeekBarPreference) {
+                ((VolumeSeekBarPreference) preference).setCallback(mVolumeCallback);
             }
-        }
+            return null;
+        });
 
         if (!isSliderHapticsSupported()) {
             Preference sliderHaptics = findPreference(SLIDER_HAPTICS_KEY);
@@ -213,22 +212,11 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        ArrayList<VolumeSeekBarPreferenceController> volumeControllers = new ArrayList<>();
-        volumeControllers.add(use(AlarmVolumePreferenceController.class));
-        volumeControllers.add(use(MediaVolumePreferenceController.class));
-        volumeControllers.add(use(SeparateRingVolumePreferenceController.class));
-        volumeControllers.add(use(NotificationVolumePreferenceController.class));
-        volumeControllers.add(use(CallVolumePreferenceController.class));
 
         use(HandsFreeProfileOutputPreferenceController.class).setCallback(listPreference ->
                 onPreferenceDataChanged(listPreference));
         mHfpOutputControllerKey =
                 use(HandsFreeProfileOutputPreferenceController.class).getPreferenceKey();
-
-        for (VolumeSeekBarPreferenceController controller : volumeControllers) {
-            controller.setCallback(mVolumeCallback);
-            getSettingsLifecycle().addObserver(controller);
-        }
     }
 
     private boolean isSliderHapticsSupported() {

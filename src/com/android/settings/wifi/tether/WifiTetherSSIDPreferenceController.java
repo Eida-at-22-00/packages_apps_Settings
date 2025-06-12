@@ -22,23 +22,25 @@ import android.content.Intent;
 import android.net.wifi.SoftApConfiguration;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreferenceController
-        implements ValidatedEditTextPreference.Validator {
+        implements ValidatedEditTextPreference.Validator,
+        EditTextPreference.OnBindEditTextListener {
 
     private static final String TAG = "WifiTetherSsidPref";
     private static final String PREF_KEY = "wifi_tether_network_name";
-    private static final String WIFI_SHARING_KEY_ALIAS = "wifi_sharing_auth_key";
-    private static final int MAX_UNLOCK_SECONDS = 60;
     @VisibleForTesting
     static final String DEFAULT_SSID = "AndroidAP";
 
@@ -95,6 +97,7 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
             ((WifiTetherSsidPreference) mPreference).setButtonVisible(false);
         }
 
+        ((EditTextPreference) mPreference).setOnBindEditTextListener(this);
         updateSsidDisplay((EditTextPreference) mPreference);
     }
 
@@ -125,26 +128,24 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
     }
 
     private void shareHotspotNetwork(Intent intent) {
-        if (WifiDppUtils.isUnlockedWithinSeconds(WIFI_SHARING_KEY_ALIAS, MAX_UNLOCK_SECONDS)) {
-            // skip the auth dialog if unlocked last minute
-            launchWifiDppConfiguratorActivity(intent);
-            return;
-        }
-        WifiDppUtils.showLockScreen(mContext, () -> launchWifiDppConfiguratorActivity(intent));
-    }
-
-    private void launchWifiDppConfiguratorActivity(Intent intent) {
-        mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+        WifiDppUtils.showLockScreenForWifiSharing(mContext, () -> {
+            mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
                     SettingsEnums.ACTION_SETTINGS_SHARE_WIFI_HOTSPOT_QR_CODE,
                     SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR,
                     /* key */ null,
                     /* value */ Integer.MIN_VALUE);
 
-        mContext.startActivity(intent);
+            mContext.startActivity(intent);
+        });
     }
 
     @VisibleForTesting
     boolean isQrCodeButtonAvailable() {
         return ((WifiTetherSsidPreference) mPreference).isQrCodeButtonAvailable();
+    }
+
+    @Override
+    public void onBindEditText(@NonNull EditText editText) {
+        editText.setHint(R.string.wifi_hotspot_name_title);
     }
 }

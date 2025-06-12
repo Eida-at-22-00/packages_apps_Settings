@@ -45,10 +45,18 @@
         </Preference>
 
         <Preference
+            android:fragment="com.android.settings.notification.SummarizationPreferenceFragment"
+            android:key="summarization_notifications_preference"
+            android:order="-33"
+            android:persistent="false"
+            android:title="@string/notification_summarization_title"
+            settings:controller="com.android.settings.notification.SummarizationPreferenceController" />
+
+        <Preference
             android:fragment="com.android.settings.notification.BundlePreferenceFragment"
             android:key="bundle_notifications_preference"
             android:persistent="false"
-            android:order="12"
+            android:order="-32"
             android:title="@string/notification_bundle_title"
             settings:controller="com.android.settings.notification.BundlePreferenceController" />
     </PreferenceCategory>
@@ -94,7 +102,7 @@
 
         <Preference
             android:key="lock_screen_notifications_page"
-            android:order="14"
+            android:order="-13"
             android:persistent="false"
             android:title="@string/lock_screen_notifs_title"
             android:fragment="com.android.settings.notification.LockScreenNotificationsPreferencePageFragment"
