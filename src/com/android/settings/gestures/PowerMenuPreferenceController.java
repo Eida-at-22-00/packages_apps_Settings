@@ -17,6 +17,7 @@
 package com.android.settings.gestures;
 
 import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
+import static android.provider.Settings.Secure.DOUBLE_TAP_POWER_BUTTON_GESTURE;
 import static android.provider.Settings.System.TORCH_POWER_BUTTON_GESTURE;
 
 import android.content.ContentResolver;
@@ -46,8 +47,12 @@ public class PowerMenuPreferenceController extends BasePreferenceController {
         if (torch != 0)
             enabledStrings.add(mContext.getString(R.string.torch_power_button_gesture_title));
         int value = Settings.Secure.getInt(resolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
-        if (value == 0 && torch != 1)
-            enabledStrings.add(mContext.getString(R.string.double_tap_power_for_camera_title));
+        if (value == 0 && torch != 1) {
+            int gesture = Settings.Secure.getInt(resolver, DOUBLE_TAP_POWER_BUTTON_GESTURE, 0);
+            enabledStrings.add(mContext.getString(
+                    gesture == 0 ? R.string.double_tap_power_for_camera_title
+                                 : R.string.double_tap_power_wallet_action_summary));
+        }
         boolean enabled = PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(mContext);
         if (enabled)
             enabledStrings.add(mContext.getString(R.string.power_menu_summary_long_press_for_assistant));

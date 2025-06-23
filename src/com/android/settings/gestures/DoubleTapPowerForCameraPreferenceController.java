@@ -69,9 +69,13 @@ public class DoubleTapPowerForCameraPreferenceController extends BasePreferenceC
                 .isMultiTargetDoubleTapPowerButtonGestureAvailable(mContext)) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        return DoubleTapPowerSettingsUtils.isDoubleTapPowerButtonGestureEnabled(mContext)
-                ? AVAILABLE
-                : DISABLED_DEPENDENT_SETTING;
+        if (!DoubleTapPowerSettingsUtils.isDoubleTapPowerButtonGestureEnabled(mContext)) {
+            return DISABLED_DEPENDENT_SETTING;
+        }
+        if (!DoubleTapPowerPreferenceController.isAvailableDependent(mContext)) {
+            return DISABLED_DEPENDENT_SETTING;
+        }
+        return AVAILABLE;
     }
 
     @Override
