@@ -92,7 +92,7 @@ public class DoubleTapPowerPreferenceController extends TogglePreferenceControll
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setEnabled(getAvailabilityStatus() != DISABLED_DEPENDENT_SETTING);
+        preference.setEnabled(getAvailabilityStatus() == AVAILABLE);
     }
 
     @Override
@@ -106,12 +106,7 @@ public class DoubleTapPowerPreferenceController extends TogglePreferenceControll
 
     @Override
     public void displayPreference(@NonNull PreferenceScreen screen) {
-        if (!android.service.quickaccesswallet.Flags.launchWalletOptionOnPowerDoubleTap()) {
-            mPreference = screen.findPreference(PREF_KEY);
-            if (mPreference != null) {
-                mPreference.setTitle(R.string.double_tap_power_for_camera_title);
-            }
-        }
+        mPreference = screen.findPreference(PREF_KEY);
         super.displayPreference(screen);
     }
 
