@@ -82,21 +82,21 @@ public class LockscreenDashboardFragment extends DashboardFragment
     static final String KEY_ADD_USER_FROM_LOCK_SCREEN =
             "security_lockscreen_add_users_when_locked";
 
-    private static final String KEY_WEATHER_PROVIDER = "lockscreen_weather_provider";
-    private static final String KEY_WEATHER_PREFS = "lockscreen_weather_prefs";
-    private static final String KEY_WEATHER_LOCATION = "lockscreen_weather_location";
-    private static final String KEY_WEATHER_TEXT = "lockscreen_weather_text";
-    private static final String KEY_WEATHER_CLICK = "lockscreen_weather_click_updates";
+    // private static final String KEY_WEATHER_PROVIDER = "lockscreen_weather_provider";
+    // private static final String KEY_WEATHER_PREFS = "lockscreen_weather_prefs";
+    // private static final String KEY_WEATHER_LOCATION = "lockscreen_weather_location";
+    // private static final String KEY_WEATHER_TEXT = "lockscreen_weather_text";
+    // private static final String KEY_WEATHER_CLICK = "lockscreen_weather_click_updates";
 
     private AmbientDisplayConfiguration mConfig;
     private OwnerInfoPreferenceController mOwnerInfoPreferenceController;
     @VisibleForTesting
     ContentObserver mControlsContentObserver;
 
-    private Preference mWeatherPrefs;
-    private SystemSettingSwitchPreference mWeatherLocation;
-    private SystemSettingSwitchPreference mWeatherText;
-    private SystemSettingSwitchPreference mWeatherClick;
+    // private Preference mWeatherPrefs;
+    // private SystemSettingSwitchPreference mWeatherLocation;
+    // private SystemSettingSwitchPreference mWeatherText;
+    // private SystemSettingSwitchPreference mWeatherClick;
 
     @Override
     public int getMetricsCategory() {
@@ -117,29 +117,29 @@ public class LockscreenDashboardFragment extends DashboardFragment
         replaceEnterpriseStringTitle("security_setting_lock_screen_notif_work_header",
                 WORK_PROFILE_NOTIFICATIONS_SECTION_HEADER, R.string.profile_section_header);
 
-        PreferenceScreen screen = getPreferenceScreen();
-        mWeatherPrefs = screen.findPreference(KEY_WEATHER_PREFS);
-        mWeatherLocation = screen.findPreference(KEY_WEATHER_LOCATION);
-        mWeatherText = screen.findPreference(KEY_WEATHER_TEXT);
-        mWeatherClick = screen.findPreference(KEY_WEATHER_CLICK);
-        SystemSettingListPreference weatherProvider = screen.findPreference(KEY_WEATHER_PROVIDER);
-        final int provider = Settings.System.getInt(
-                getContentResolver(), KEY_WEATHER_PROVIDER, LOCKSCREEN_WEATHER_PROVIDER_DEFAULT);
-        weatherProvider.setValueIndex(provider);
-        weatherProvider.setSummary(weatherProvider.getEntries()[provider]);
-        updateWeatherEnablement(provider);
-        weatherProvider.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (preference != weatherProvider) return false;
-                final int value = Integer.parseInt((String) newValue);
-                Settings.System.putInt(getContentResolver(),
-                        KEY_WEATHER_PROVIDER, value);
-                weatherProvider.setSummary(weatherProvider.getEntries()[value]);
-                updateWeatherEnablement(value);
-                return true;
-            }
-        });
+        // PreferenceScreen screen = getPreferenceScreen();
+        // mWeatherPrefs = screen.findPreference(KEY_WEATHER_PREFS);
+        // mWeatherLocation = screen.findPreference(KEY_WEATHER_LOCATION);
+        // mWeatherText = screen.findPreference(KEY_WEATHER_TEXT);
+        // mWeatherClick = screen.findPreference(KEY_WEATHER_CLICK);
+        // SystemSettingListPreference weatherProvider = screen.findPreference(KEY_WEATHER_PROVIDER);
+        // final int provider = Settings.System.getInt(
+        //         getContentResolver(), KEY_WEATHER_PROVIDER, LOCKSCREEN_WEATHER_PROVIDER_DEFAULT);
+        // weatherProvider.setValueIndex(provider);
+        // weatherProvider.setSummary(weatherProvider.getEntries()[provider]);
+        // updateWeatherEnablement(provider);
+        // weatherProvider.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+        //     @Override
+        //     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        //         if (preference != weatherProvider) return false;
+        //         final int value = Integer.parseInt((String) newValue);
+        //         Settings.System.putInt(getContentResolver(),
+        //                 KEY_WEATHER_PROVIDER, value);
+        //         weatherProvider.setSummary(weatherProvider.getEntries()[value]);
+        //         updateWeatherEnablement(value);
+        //         return true;
+        //     }
+        // });
     }
 
     @Override
@@ -218,13 +218,13 @@ public class LockscreenDashboardFragment extends DashboardFragment
         return LockScreenPreferenceScreen.KEY;
     }
 
-    private void updateWeatherEnablement(int provider) {
-        final boolean enabled = provider == LOCKSCREEN_WEATHER_PROVIDER_OMNI;
-        mWeatherPrefs.setVisible(enabled);
-        mWeatherLocation.setVisible(enabled);
-        mWeatherText.setVisible(enabled);
-        mWeatherClick.setVisible(enabled);
-    }
+    // private void updateWeatherEnablement(int provider) {
+    //     final boolean enabled = provider == LOCKSCREEN_WEATHER_PROVIDER_OMNI;
+    //     mWeatherPrefs.setVisible(enabled);
+    //     mWeatherLocation.setVisible(enabled);
+    //     mWeatherText.setVisible(enabled);
+    //     mWeatherClick.setVisible(enabled);
+    // }
 
     private AmbientDisplayConfiguration getConfig(Context context) {
         if (mConfig == null) {
